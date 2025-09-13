@@ -1,347 +1,173 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Virtual Inverter Demo</title>
   <style>
-    :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--muted:#9aa6b2;--glass:rgba(255,255,255,0.03)}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,Segoe UI,Roboto,Helvetica,Arial;background:linear-gradient(180deg,#071029 0%, #071723 100%);color:#e6eef6}
-    .wrap{max-width:980px;margin:28px auto;padding:18px}
-    header{display:flex;gap:16px;align-items:center}
-    h1{margin:0;font-size:20px}
-    .badge{background:var(--accent);color:#012029;padding:6px 10px;border-radius:8px;font-weight:700}
-    .grid{display:grid;grid-template-columns:280px 1fr;gap:18px;margin-top:18px}
-    .card{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
-    .muted{color:var(--muted);font-size:13px}
-
-    /* sidebar */
-    .sidebar nav{display:flex;flex-direction:column;gap:8px}
-    .btn{background:var(--glass);border:1px solid rgba(255,255,255,0.03);padding:10px;border-radius:8px;color:inherit;cursor:pointer;text-align:left}
-    .btn:hover{transform:translateY(-2px)}
-
-    /* main */
-    .plans{display:flex;flex-wrap:wrap;gap:12px}
-    .plan{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:12px;border-radius:10px;min-width:170px}
-    .plan h3{margin:0 0 6px 0}
-    label{display:block;margin-top:8px;font-size:13px}
-    input,select{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.05);background:transparent;color:inherit}
-    .row{display:flex;gap:8px}
-    .small{font-size:13px;color:var(--muted)}
-
-    table{width:100%;border-collapse:collapse}
-    td,th{padding:8px;border-bottom:1px dashed rgba(255,255,255,0.03);font-size:14px}
-    .center{display:flex;gap:8px}
-
-    footer{margin-top:18px;color:var(--muted);font-size:13px}
-
-    .notice{background:#0b2b2e;padding:8px;border-radius:8px;color:#bdeef1}
-
-    @media(max-width:880px){.grid{grid-template-columns:1fr;}.sidebar{order:2}}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f9fa;
+      color: #333;
+    }
+    header {
+      background: #0077b6;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      color: #0077b6;
+      margin-bottom: 15px;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    form input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    form button {
+      background: #0077b6;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    form button:hover {
+      background: #005f86;
+    }
+    .message {
+      margin-top: 15px;
+      padding: 10px;
+      background: #d1e7dd;
+      color: #0f5132;
+      border: 1px solid #badbcc;
+      border-radius: 5px;
+      display: none;
+    }
+    .dashboard {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    footer {
+      text-align: center;
+      background: #0077b6;
+      color: #fff;
+      padding: 15px;
+      margin-top: 40px;
+    }
+    .pay-btn {
+      background: #28a745;
+      margin-top: 10px;
+    }
+    .pay-btn:hover {
+      background: #1e7e34;
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div>
-        <h1>Virtual Inverter Demo <span class="badge">Demo</span></h1>
-        <div class="muted">Simulation only — koi real paise nahin. Use for testing & learning.</div>
-      </div>
-      <div style="margin-left:auto" class="muted">Local demo • Data saved in browser</div>
-    </header>
 
-    <div class="grid">
-      <aside class="sidebar card">
-        <nav>
-          <button class="btn" onclick="show('home')">🏠 Home</button>
-          <button class="btn" onclick="show('plans')">📦 Plans</button>
-          <button class="btn" onclick="show('dashboard')">📊 My Account</button>
-          <button class="btn" onclick="show('admin')">🔧 Admin</button>
-          <div style="height:8px"></div>
-          <div id="auth-area"></div>
-          <div style="height:8px"></div>
-          <div class="small muted">Tip: Register as user. To open Admin panel use password: <code style="background:rgba(0,0,0,0.2);padding:2px 6px;border-radius:6px">admin123</code></div>
-        </nav>
-      </aside>
+<header>
+  <h1>Virtual Inverter Demo</h1>
+  <p>Safe & Transparent Investment Platform</p>
+</header>
 
-      <main class="card" id="main">
-        <!-- content rendered by JS -->
-      </main>
-    </div>
+<section>
+  <h2>Profit Sharing</h2>
+  <p>We follow a transparent model: <strong>60% profit goes to Investors</strong> and <strong>40% goes to Company</strong>.</p>
+</section>
 
-    <footer>
-      <div class="muted">This is a virtual demo for learning and testing only. Do not accept it as financial advice.</div>
-      <div style="height:8px"></div>
-      <div class="muted">Created by Virtual Inverter Demo</div>
-    </footer>
+<section>
+  <h2>Start Investing</h2>
+  <form id="investmentForm">
+    <input type="text" id="name" placeholder="Enter your name" required>
+    <input type="email" id="email" placeholder="Enter your email" required>
+    <input type="number" id="amount" placeholder="Enter amount (Minimum 500 PKR)" required>
+    <button type="submit">Invest Now</button>
+    <button type="button" class="pay-btn" onclick="showPayment()">Pay with NayaPay</button>
+    <div class="message" id="messageBox"></div>
+  </form>
+</section>
+
+<section>
+  <h2>Demo Dashboard</h2>
+  <div class="dashboard" id="dashboardBox">
+    <p><strong>Investment Amount:</strong> <span id="invAmount">0</span> PKR</p>
+    <p><strong>Estimated Monthly Profit (60% to Investor):</strong> <span id="profitAmount">0</span> PKR</p>
+    <p><strong>Company Share (40%):</strong> <span id="companyShare">0</span> PKR</p>
   </div>
+</section>
 
-  <script>
-    /* --------- Simple demo data & helpers --------- */
-    const STORAGE_KEY = 'virtual_inverter_demo_v1';
-    let state = { users:[], currentUser:null, plans: [
-      {id:1,name:'Starter',min:500,max:4999,durationDays:7,roiPercent:10},
-      {id:2,name:'Silver',min:5000,max:19999,durationDays:30,roiPercent:15},
-      {id:3,name:'Gold',min:20000,max:99999,durationDays:30,roiPercent:20},
-      {id:4,name:'VIP',min:100000,max:999999,durationDays:90,roiPercent:30}
-    ], deposits:[], withdraws:[] };
+<section>
+  <h2>Contact Us</h2>
+  <p>Email: <a href="mailto:virtualflowmarketing@gmail.com">virtualflowmarketing@gmail.com</a></p>
+</section>
 
-    // load
-    function load(){
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if(raw){
-        try{state = JSON.parse(raw);}catch(e){console.warn('load err',e)}
-      } else {
-        // create default admin user
-        state.users.push({id:1,email:'admin@demo.local',name:'Admin',balance:100000,role:'admin',password:'admin123',joined:Date.now()});
-        save();
-      }
-    }
-    function save(){ localStorage.setItem(STORAGE_KEY,JSON.stringify(state)); renderAuthArea(); }
+<footer>
+  <p>&copy; 2025 Virtual Inverter Demo. All Rights Reserved.</p>
+</footer>
 
-    function uid(){return Math.floor(Math.random()*999999)+Date.now()%1000}
+<script>
+  const form = document.getElementById('investmentForm');
+  const messageBox = document.getElementById('messageBox');
+  const invAmount = document.getElementById('invAmount');
+  const profitAmount = document.getElementById('profitAmount');
+  const companyShare = document.getElementById('companyShare');
 
-    // UI navigation
-    function show(page){
-      if(page==='home') renderHome();
-      if(page==='plans') renderPlans();
-      if(page==='dashboard') renderDashboard();
-      if(page==='admin') renderAdmin();
-    }
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
 
-    /* ---------- Authentication UI ---------- */
-    function renderAuthArea(){
-      const div = document.getElementById('auth-area');
-      div.innerHTML = '';
-      if(!state.currentUser){
-        const loginBtn = document.createElement('button');
-        loginBtn.className='btn'; loginBtn.textContent='🔑 Login / Register';
-        loginBtn.onclick = ()=>renderLogin(); div.appendChild(loginBtn);
-      } else {
-        const u = state.users.find(x=>x.id===state.currentUser);
-        const info = document.createElement('div');
-        info.innerHTML = `<div style="font-weight:700">${escapeHtml(u.name)}</div><div class='small muted'>Balance: Rs. ${format(u.balance)}</div><div style='height:6px'></div>`;
-        const logout = document.createElement('button'); logout.className='btn'; logout.textContent='Sign out'; logout.onclick=()=>{state.currentUser=null;save();renderAuthArea();renderHome()};
-        div.appendChild(info); div.appendChild(logout);
-      }
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const amount = parseInt(document.getElementById('amount').value);
+
+    if (amount < 500) {
+      messageBox.style.display = 'block';
+      messageBox.style.background = '#f8d7da';
+      messageBox.style.color = '#842029';
+      messageBox.innerText = "Minimum investment is 500 PKR.";
+      return;
     }
 
-    function renderLogin(){
-      const html = `
-        <h2>Login / Register</h2>
-        <div class="muted small">Enter email and name to create a demo account. Password optional (demo only).</div>
-        <label>Name<input id="i_name"></label>
-        <label>Email<input id="i_email" type="email"></label>
-        <label>Password (optional)<input id="i_pass" type="password"></label>
-        <div style="height:8px"></div>
-        <div class="row">
-          <button class="btn" onclick="doRegister()">Create / Login</button>
-          <button class="btn" onclick="renderHome()">Cancel</button>
-        </div>
-      `;
-      document.getElementById('main').innerHTML = html;
-    }
+    // Profit calculation
+    const investorProfit = Math.floor(amount * 0.60 * 0.10); // 10% monthly growth example
+    const companyProfit = Math.floor(amount * 0.40 * 0.10);
 
-    function doRegister(){
-      const name = document.getElementById('i_name').value.trim();
-      const email = document.getElementById('i_email').value.trim().toLowerCase();
-      const pass = document.getElementById('i_pass').value || '';
-      if(!email || !name){alert('Name and email chahiye'); return}
-      let user = state.users.find(u=>u.email===email);
-      if(!user){
-        user = {id:uid(),email,name,balance:1000,role:'user',password:pass,joined:Date.now()};
-        state.users.push(user);
-        alert('Account created. Aapko demo balance Rs.1000 diya gaya hai.');
-      } else {
-        if(pass && user.password!==pass){alert('Wrong password for existing email'); return}
-        alert('Logged in');
-      }
-      state.currentUser = user.id; save(); renderDashboard();
-    }
+    invAmount.innerText = amount;
+    profitAmount.innerText = investorProfit;
+    companyShare.innerText = companyProfit;
 
-    /* ---------- Pages ---------- */
-    function renderHome(){
-      document.getElementById('main').innerHTML = `
-        <h2>Welcome to Virtual Inverter Demo</h2>
-        <p class='muted'>Yeh ek simulation hai jis se aap investment flows, plans aur withdraw process test kar sakte hain. Koi real paise involve nahin.</p>
-        <div class='notice'>Demo note: User accounts start with Rs.1000 (for new users). Admin has large balance.</div>
-        <div style='height:12px'></div>
-        <h3>Quick actions</h3>
-        <div class='row'>
-          <button class='btn' onclick="show('plans')">View Plans</button>
-          <button class='btn' onclick="renderDashboard()">Go to Dashboard</button>
-        </div>
-        <hr />
-        <h3>Recent activity (virtual)</h3>
-        ${renderActivitySummary()}
-      `;
-    }
+    messageBox.style.display = 'block';
+    messageBox.style.background = '#d1e7dd';
+    messageBox.style.color = '#0f5132';
+    messageBox.innerText = `Thank you ${name}! Our team will contact you at virtualflowmarketing@gmail.com.`;
+  });
 
-    function renderPlans(){
-      let html = `<h2>Investment Plans</h2><div class='plans'>`;
-      state.plans.forEach(p=>{
-        html += `<div class='plan'><h3>${escapeHtml(p.name)}</h3><div class='small'>Min: Rs.${format(p.min)} · Max: Rs.${format(p.max)}</div><div class='small'>Duration: ${p.durationDays} days</div><div style='height:8px'></div><b>ROI: ${p.roiPercent}%</b><div style='height:8px'></div><label>Amount<input id='amt_${p.id}' placeholder='Enter amount'></label><div style='height:8px'></div><div class='row'><button class='btn' onclick='doInvest(${p.id})'>Invest</button><button class='btn' onclick="calcPreview(${p.id})">Preview</button></div></div>`
-      });
-      html += `</div><div style='height:12px'></div><div class='small muted'>Note: This is virtual. Withdrawals are simulated and require admin approval.</div>`;
-      document.getElementById('main').innerHTML = html;
-    }
+  function showPayment() {
+    alert("Please send your payment to NayaPay account: 03280203486");
+  }
+</script>
 
-    function renderDashboard(){
-      if(!state.currentUser){ renderLogin(); return }
-      const u = state.users.find(x=>x.id===state.currentUser);
-      const myDeposits = state.deposits.filter(d=>d.userId===u.id);
-      let html = `<h2>My Dashboard</h2><div class='row'><div style='flex:1' class='card'><b>${escapeHtml(u.name)}</b><div class='small muted'>${u.email}</div><div style='height:8px'></div><div><b>Balance</b> Rs. ${format(u.balance)}</div></div>
-        <div style='width:260px' class='card'><b>Quick</b><div style='height:8px'></div><button class='btn' onclick='show(\'plans\')'>Invest Now</button><button class='btn' onclick='doRequestWithdraw()'>Request Withdraw</button></div></div>
-        <div style='height:12px'></div>
-        <h3>Your Deposits</h3>
-        ${myDeposits.length?renderDepositsTable(myDeposits):'<div class="muted">No deposits yet.</div>'}
-        <div style="height:12px"></div>
-        <h3>Withdraw Requests</h3>
-        ${renderWithdraws(u.id)}
-      `;
-      document.getElementById('main').innerHTML = html;
-    }
-
-    function renderAdmin(){
-      const html = `
-        <h2>Admin Panel</h2>
-        <div class='muted small'>Enter admin email and password to access admin tools.</div>
-        <label>Admin Email<input id='adm_email' value='admin@demo.local'></label>
-        <label>Admin Password<input id='adm_pass' type='password' value='admin123'></label>
-        <div style='height:8px'></div>
-        <div class='row'><button class='btn' onclick='adminLogin()'>Login as Admin</button><button class='btn' onclick="renderHome()">Cancel</button></div>
-      `;
-      document.getElementById('main').innerHTML = html;
-    }
-
-    function adminLogin(){
-      const email = document.getElementById('adm_email').value.trim().toLowerCase();
-      const pass = document.getElementById('adm_pass').value;
-      const user = state.users.find(u=>u.email===email && u.role==='admin');
-      if(!user || user.password!==pass){alert('Invalid admin credentials'); return}
-      state.currentUser = user.id; save();
-      // render admin tools
-      const html = `
-        <h2>Admin Tools</h2>
-        <div class='row'>
-          <div style='flex:1' class='card'><h3>Pending Withdraws</h3>${renderPendingWithdraws()}</div>
-          <div style='width:320px' class='card'><h3>Users</h3>${renderUsersList()}</div>
-        </div>
-        <div style='height:12px'></div>
-        <h3>State Controls</h3>
-        <div class='row'><button class='btn' onclick='seedTestData()'>Seed Test Activity</button><button class='btn' onclick='exportState()'>Export JSON</button><button class='btn' onclick='resetState()'>Reset Demo</button></div>
-      `;
-      document.getElementById('main').innerHTML = html;
-    }
-
-    /* ---------- Actions ---------- */
-    function calcPreview(planId){
-      const p = state.plans.find(x=>x.id===planId);
-      const amt = Number(document.getElementById('amt_'+planId).value || 0);
-      if(!amt){alert('Enter amount'); return}
-      if(amt < p.min || amt > p.max){alert('Amount out of plan range'); return}
-      const profit = Math.round(amt * p.roiPercent/100);
-      alert(`Preview:\nPlan ${p.name}\nAmount Rs.${format(amt)}\nProfit after ${p.durationDays} days: Rs.${format(profit)}\nTotal: Rs.${format(amt+profit)}`)
-    }
-
-    function doInvest(planId){
-      if(!state.currentUser){ alert('Login karein pehle'); renderLogin(); return }
-      const p = state.plans.find(x=>x.id===planId);
-      const amt = Number(document.getElementById('amt_'+planId).value || 0);
-      if(!amt){alert('Enter amount'); return}
-      if(amt < p.min || amt > p.max){alert('Amount out of plan range'); return}
-      const user = state.users.find(u=>u.id===state.currentUser);
-      if(user.balance < amt){alert('Insufficient balance'); return}
-      // deduct
-      user.balance -= amt;
-      const dep = {id:uid(),userId:user.id,planId:p.id,amount:amt,profit:Math.round(amt*p.roiPercent/100),start:Date.now(),end:Date.now()+p.durationDays*24*60*60*1000,paid:false};
-      state.deposits.push(dep);
-      state.deposits.sort((a,b)=>b.start-a.start);
-      save();
-      alert('Invested (virtual)'); renderDashboard();
-    }
-
-    function doRequestWithdraw(){
-      if(!state.currentUser){ renderLogin(); return }
-      const user = state.users.find(u=>u.id===state.currentUser);
-      const amount = Number(prompt('Enter withdraw amount (virtual):','100'));
-      if(!amount || amount<=0){alert('Invalid amount');return}
-      if(amount>user.balance){alert('Insufficient balance');return}
-      const req = {id:uid(),userId:user.id,amount,created:Date.now(),status:'pending'};
-      state.withdraws.push(req);
-      save();
-      alert('Withdraw request created (pending admin approval)'); renderDashboard();
-    }
-
-    /* ---------- Admin helpers ---------- */
-    function renderPendingWithdraws(){
-      const pending = state.withdraws.filter(w=>w.status==='pending');
-      if(!pending.length) return '<div class="muted">No pending withdraws.</div>';
-      let t = '<table><tr><th>User</th><th>Amount</th><th>Action</th></tr>';
-      pending.forEach(w=>{
-        const u = state.users.find(x=>x.id===w.userId);
-        t += `<tr><td>${escapeHtml(u.name)}<div class='small muted'>${u.email}</div></td><td>Rs. ${format(w.amount)}</td><td><div class='center'><button class='btn' onclick='approveWithdraw("${w.id}")'>Approve</button><button class='btn' onclick='rejectWithdraw("${w.id}")'>Reject</button></div></td></tr>`
-      });
-      t += '</table>';
-      return t;
-    }
-
-    function approveWithdraw(id){
-      const w = state.withdraws.find(x=>x.id===id); if(!w) return; const u = state.users.find(x=>x.id===w.userId);
-      // simulate transfer by deducting balance and mark approved
-      if(u.balance < w.amount){alert('User has insufficient balance'); w.status='rejected'; save(); renderAdmin(); return}
-      u.balance -= w.amount; w.status='approved'; w.processed=Date.now(); save(); alert('Withdraw approved (virtual)'); renderAdmin();
-    }
-    function rejectWithdraw(id){ const w = state.withdraws.find(x=>x.id===id); if(!w) return; w.status='rejected'; save(); renderAdmin(); }
-
-    function renderUsersList(){
-      if(!state.users.length) return '<div class=\'muted\'>No users</div>';
-      let html='<table><tr><th>Name</th><th>Email</th><th>Balance</th></tr>';
-      state.users.forEach(u=> html+=`<tr><td>${escapeHtml(u.name)}</td><td class='small muted'>${u.email}</td><td>Rs. ${format(u.balance)}</td></tr>`);
-      html+='</table>';
-      return html;
-    }
-
-    /* ---------- Utilities & small features ---------- */
-    function renderDepositsTable(list){
-      let t = '<table><tr><th>Plan</th><th>Amount</th><th>Profit</th><th>Ends</th></tr>';
-      list.forEach(d=>{ const p = state.plans.find(x=>x.id===d.planId); t+=`<tr><td>${escapeHtml(p.name)}</td><td>Rs. ${format(d.amount)}</td><td>Rs. ${format(d.profit)}</td><td class='small muted'>${new Date(d.end).toLocaleString()}</td></tr>`});
-      t += '</table>';
-      return t;
-    }
-
-    function renderWithdraws(uid){
-      const list = state.withdraws.filter(w=>w.userId===uid);
-      if(!list.length) return '<div class=\'muted\'>No withdraw requests</div>';
-      let t = '<table><tr><th>Amount</th><th>Status</th></tr>';
-      list.forEach(w=> t+=`<tr><td>Rs. ${format(w.amount)}</td><td class='small muted'>${w.status}</td></tr>`);
-      t += '</table>';
-      return t;
-    }
-
-    function renderActivitySummary(){
-      const last = state.deposits.slice(0,6).map(d=>{const u=state.users.find(x=>x.id===d.userId);const p=state.plans.find(x=>x.id===d.planId);return `<div class=\'small\'>${escapeHtml(u.name)} invested Rs.${format(d.amount)} in ${escapeHtml(p.name)}</div>`}).join('');
-      return last||'<div class="muted">No recent activity</div>';
-    }
-
-    function renderPendingWithdraws(){return renderPendingWithdraws}
-
-    function seedTestData(){
-      // create a few users and deposits
-      for(let i=0;i<3;i++){ const u={id:uid(),email:`user${i}@demo.local`,name:`User ${i+1}`,balance:5000+Math.floor(Math.random()*5000),role:'user',password:'',joined:Date.now()}; state.users.push(u); state.deposits.push({id:uid(),userId:u.id,planId:1,amount:500+100*i,profit:Math.round((500+100*i)*0.1),start:Date.now()-1000*60*60*24*i,end:Date.now()+1000*60*60*24*(7-i),paid:false}); }
-      save(); alert('Seeded test data'); renderAdmin();
-    }
-
-    function exportState(){ const blob=new Blob([JSON.stringify(state, null, 2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='virtual-inverter-demo-state.json'; a.click(); }
-    function resetState(){ if(!confirm('Reset all demo data?')) return; localStorage.removeItem(STORAGE_KEY); state={users:[],currentUser:null,plans:state.plans,deposits:[],withdraws:[]}; load(); renderHome(); }
-
-    /* ---------- small helpers ---------- */
-    function format(n){ return Number(n).toLocaleString('en-IN') }
-    function escapeHtml(s){ return (s+'').replace(/[&<>"']/g,(c)=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c])) }
-
-    // initial load
-    load(); show('home');
-  </script>
 </body>
 </html>
