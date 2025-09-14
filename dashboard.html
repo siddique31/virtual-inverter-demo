@@ -5,23 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Virtual Inverter - Dashboard</title>
   <style>
-    body { font-family: Arial, sans-serif; background:#f4f4f4; text-align:center; padding:30px; }
+    body { font-family: Arial, sans-serif; margin:0; background:#f8f9fa; }
+    header, footer { background:#343a40; color:#fff; padding:15px; text-align:center; }
+    nav a { color:#fff; margin:0 15px; text-decoration:none; font-weight:bold; }
+    nav a:hover { text-decoration:underline; }
+    .container { text-align:center; padding:40px; }
     input, select, button { display:block; margin:10px auto; padding:10px; width:250px; }
     button { background:#28a745; color:#fff; border:none; cursor:pointer; }
     button:hover { background:#218838; }
+    footer { margin-top:40px; }
   </style>
 </head>
 <body>
-  <h1>Dashboard</h1>
-  <h2>Investment Form</h2>
-  <input type="number" id="amount" placeholder="Amount (min 500)" required>
-  <select id="plan">
-    <option value="10">10% Plan</option>
-    <option value="20">20% Plan</option>
-    <option value="30">30% Plan</option>
-  </select>
-  <button onclick="invest()">Invest</button>
-  <p id="profit"></p>
+  <header>
+    <h1>Virtual Inverter</h1>
+    <nav>
+      <a href="index.html">Signup</a>
+      <a href="login.html">Login</a>
+      <a href="dashboard.html">Dashboard</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Investment Form</h2>
+    <input type="number" id="amount" placeholder="Amount (min 500)" required>
+    <select id="plan">
+      <option value="10">10% Plan</option>
+      <option value="20">20% Plan</option>
+      <option value="30">30% Plan</option>
+    </select>
+    <button onclick="invest()">Invest</button>
+    <p id="profit"></p>
+  </div>
+
+  <footer>
+    <p>📧 Email: virtualflowmarketing@gmail.com | 📱 WhatsApp: 03017016801</p>
+  </footer>
 
   <script>
     function invest() {
