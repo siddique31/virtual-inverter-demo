@@ -3,56 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Virtual Inverter - Dashboard</title>
+  <title>Dashboard - Virtual Flow</title>
   <style>
-    body { font-family: Arial, sans-serif; margin:0; background:#f8f9fa; }
-    header, footer { background:#343a40; color:#fff; padding:15px; text-align:center; }
-    nav a { color:#fff; margin:0 15px; text-decoration:none; font-weight:bold; }
-    nav a:hover { text-decoration:underline; }
-    .container { text-align:center; padding:40px; }
-    input, select, button { display:block; margin:10px auto; padding:10px; width:250px; }
-    button { background:#28a745; color:#fff; border:none; cursor:pointer; }
-    button:hover { background:#218838; }
-    footer { margin-top:40px; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .box {
+      margin: 100px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      width: 400px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    h2 { color: #333; }
+    button {
+      margin-top: 20px;
+      padding: 10px 15px;
+      background: #e74c3c;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover { background: #c0392b; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Virtual Inverter</h1>
-    <nav>
-      <a href="index.html">Signup</a>
-      <a href="login.html">Login</a>
-      <a href="dashboard.html">Dashboard</a>
-    </nav>
-  </header>
-
-  <div class="container">
-    <h2>Investment Form</h2>
-    <input type="number" id="amount" placeholder="Amount (min 500)" required>
-    <select id="plan">
-      <option value="10">10% Plan</option>
-      <option value="20">20% Plan</option>
-      <option value="30">30% Plan</option>
-    </select>
-    <button onclick="invest()">Invest</button>
-    <p id="profit"></p>
+  <div class="box">
+    <h2>Welcome to Your Dashboard 🎉</h2>
+    <p>You are successfully logged in.</p>
+    <button onclick="logout()">Logout</button>
   </div>
 
-  <footer>
-    <p>📧 Email: virtualflowmarketing@gmail.com | 📱 WhatsApp: 03017016801</p>
-  </footer>
-
   <script>
-    function invest() {
-      let amount = parseFloat(document.getElementById("amount").value);
-      let plan = parseFloat(document.getElementById("plan").value);
-      if (isNaN(amount) || amount < 500) {
-        alert("Minimum investment is 500 PKR");
-        return;
-      }
-      let profit = amount * (plan / 100);
-      document.getElementById("profit").innerText =
-        "Your Profit: " + profit + " PKR";
+    function logout() {
+      alert("You have been logged out.");
+      window.location.href = "index.html"; // back to login/signup
     }
   </script>
 </body>
