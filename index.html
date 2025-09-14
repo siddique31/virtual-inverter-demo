@@ -3,64 +3,130 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Virtual Inverter - Home</title>
+  <title>Signup & Login - Virtual Flow</title>
   <style>
-    body { font-family: Arial, sans-serif; margin:0; background:#f8f9fa; }
-    header, footer { background:#343a40; color:#fff; padding:15px; text-align:center; }
-    nav a { color:#fff; margin:0 15px; text-decoration:none; font-weight:bold; }
-    nav a:hover { text-decoration:underline; }
-    .container { text-align:center; padding:40px; }
-    .hero { background:#28a745; color:#fff; padding:60px 20px; border-radius:8px; }
-    .hero h1 { font-size:2.5em; margin-bottom:20px; }
-    .services { margin-top:40px; }
-    .service-card { background:#fff; border:1px solid #ddd; padding:20px; margin:10px auto; width:80%; max-width:400px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
-    .cta button { background:#007bff; color:#fff; border:none; padding:15px 25px; font-size:16px; margin:10px; cursor:pointer; border-radius:5px; }
-    .cta button:hover { background:#0056b3; }
-    footer { margin-top:40px; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      width: 300px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    h2 { text-align: center; }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover { background: #45a049; }
+    .toggle {
+      text-align: center;
+      margin-top: 10px;
+      cursor: pointer;
+      color: blue;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Virtual Inverter</h1>
-    <nav>
-      <a href="home.html">Home</a>
-      <a href="index.html">Signup</a>
-      <a href="login.html">Login</a>
-      <a href="dashboard.html">Dashboard</a>
-    </nav>
-  </header>
 
   <div class="container">
-    <section class="hero">
-      <h1>Welcome to Virtual Inverter</h1>
-      <p>Your trusted partner for smart online investment and growth.</p>
-    </section>
+    <h2 id="form-title">Signup</h2>
+    <div id="signup-form">
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <input type="number" id="investment" placeholder="Investment Amount (min 500)" min="500">
+      <button onclick="signup()">Signup</button>
+    </div>
 
-    <section class="services">
-      <h2>💡 Our Investment Plans</h2>
-      <div class="service-card">
-        <h3>10% Profit Plan</h3>
-        <p>Start with just 500 PKR and get 10% return.</p>
-      </div>
-      <div class="service-card">
-        <h3>20% Profit Plan</h3>
-        <p>Invest for higher returns with 20% growth.</p>
-      </div>
-      <div class="service-card">
-        <h3>30% Profit Plan</h3>
-        <p>Maximize your earnings with our 30% plan.</p>
-      </div>
-    </section>
+    <div id="login-form" style="display:none;">
+      <input type="email" id="login-email" placeholder="Email" required>
+      <input type="password" id="login-password" placeholder="Password" required>
+      <button onclick="login()">Login</button>
+    </div>
 
-    <section class="cta">
-      <h2>🚀 Ready to Start?</h2>
-      <a href="index.html"><button>Signup Now</button></a>
-      <a href="login.html"><button>Login</button></a>
-    </section>
+    <div class="toggle" onclick="toggleForm()">Already have an account? Login</div>
   </div>
 
-  <footer>
-    <p>📧 Email: virtualflowmarketing@gmail.com</p>
-  </footer>
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbzjhM63rDELRNS2bqA8UpI-2BVelubJzKWGjs-gdYkmTpQ39awUvzhJu7dcz8tGlX9Opw/exec";
+
+    function toggleForm() {
+      const signupForm = document.getElementById("signup-form");
+      const loginForm = document.getElementById("login-form");
+      const title = document.getElementById("form-title");
+      const toggle = document.querySelector(".toggle");
+
+      if (signupForm.style.display === "none") {
+        signupForm.style.display = "block";
+        loginForm.style.display = "none";
+        title.textContent = "Signup";
+        toggle.textContent = "Already have an account? Login";
+      } else {
+        signupForm.style.display = "none";
+        loginForm.style.display = "block";
+        title.textContent = "Login";
+        toggle.textContent = "Don't have an account? Signup";
+      }
+    }
+
+    // Signup
+    async function signup() {
+      let name = document.getElementById("name").value;
+      let email = document.getElementById("email").value;
+      let password = document.getElementById("password").value;
+      let investment = document.getElementById("investment").value || 500;
+
+      let data = { name, email, password, investment };
+
+      let res = await fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(data)
+      });
+      let result = await res.json();
+      if (result.status === "success") {
+        alert("Signup successful! Now login.");
+        toggleForm();
+      } else {
+        alert("Signup failed!");
+      }
+    }
+
+    // Login
+    async function login() {
+      let email = document.getElementById("login-email").value;
+      let password = document.getElementById("login-password").value;
+
+      let res = await fetch(`${scriptURL}?email=${email}&password=${password}`);
+      let result = await res.json();
+      if (result.status === "success") {
+        alert("Login successful!");
+      } else {
+        alert("Invalid email or password.");
+      }
+    }
+  </script>
+
 </body>
 </html>
