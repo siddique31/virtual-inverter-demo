@@ -3,153 +3,150 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Virtual Flow Investment</title>
+  <title>Virtual Inverter</title>
   <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f8f9fa; color:#333;}
-    header {background:#0077b6; color:#fff; padding:20px; text-align:center;}
-    header h1 {margin:0;}
-    section {padding:30px 20px; max-width:900px; margin:auto;}
-    h2 {color:#0077b6; margin-bottom:15px;}
-    form {background:#fff; padding:20px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);}
-    form input {width:100%; padding:10px; margin:10px 0; border:1px solid #ccc; border-radius:5px;}
-    form button {background:#0077b6; color:#fff; padding:10px 20px; border:none; border-radius:5px; cursor:pointer;}
-    form button:hover {background:#005f86;}
-    .message {margin-top:15px; padding:10px; background:#d1e7dd; color:#0f5132; border:1px solid #badbcc; border-radius:5px; display:none;}
-    .dashboard {background:#fff; padding:20px; border-radius:8px; margin-top:20px; box-shadow:0 2px 8px rgba(0,0,0,0.1);}
-    footer {text-align:center; background:#0077b6; color:#fff; padding:15px; margin-top:40px;}
-    .pay-btn {background:#28a745; margin-top:10px;}
-    .pay-btn:hover {background:#1e7e34;}
-    .toggle {margin-top:15px; font-size:14px; color:#555; cursor:pointer; text-align:center;}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+    }
+    header {
+      background: #2c3e50;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+      box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #2c3e50;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background: #27ae60;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+    }
+    button:hover {
+      background: #219150;
+    }
+    footer {
+      background: #2c3e50;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      margin-top: 30px;
+    }
   </style>
 </head>
 <body>
+  <header>
+    <h1>Virtual Inverter</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#signup">Sign Up</a>
+      <a href="#login">Login</a>
+      <a href="#invest">Invest</a>
+    </nav>
+  </header>
 
-<header>
-  <h1>Virtual Flow Investment</h1>
-  <p>Safe & Transparent Investment Platform</p>
-</header>
+  <div class="container">
+    <!-- Home -->
+    <div id="home" class="card">
+      <h2>Welcome to Virtual Inverter</h2>
+      <p>Invest and grow with us. Minimum investment only <b>500 PKR</b>. 
+      Profit will be shared fairly with all investors.</p>
+    </div>
 
-<section>
-  <h2>Sign In / Sign Up</h2>
-  <form id="authForm">
-    <input type="text" id="name" placeholder="Full Name" style="display:none">
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="password" id="password" placeholder="Password" required>
-    <button type="submit">Submit</button>
-  </form>
-  <div class="toggle" onclick="toggleForm()">Don't have an account? Sign Up</div>
-  <div class="message" id="authMessage"></div>
-</section>
+    <!-- Signup -->
+    <div id="signup" class="card">
+      <h2>Create Account</h2>
+      <form id="signupForm">
+        <input type="text" placeholder="Full Name" name="name" required>
+        <input type="email" placeholder="Email" name="email" required>
+        <input type="password" placeholder="Password" name="password" required>
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
 
-<section>
-  <h2>Start Investing</h2>
-  <form id="investmentForm">
-    <input type="number" id="amount" placeholder="Enter amount (Minimum 500 PKR)" required>
-    <button type="submit">Invest Now</button>
-    <button type="button" class="pay-btn" onclick="showPayment()">Pay with NayaPay</button>
-    <div class="message" id="invMessage"></div>
-  </form>
-</section>
+    <!-- Login -->
+    <div id="login" class="card">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input type="email" placeholder="Email" name="email" required>
+        <input type="password" placeholder="Password" name="password" required>
+        <button type="submit">Login</button>
+      </form>
+    </div>
 
-<section>
-  <h2>Demo Dashboard</h2>
-  <div class="dashboard" id="dashboardBox">
-    <p><strong>Investment Amount:</strong> <span id="invAmount">0</span> PKR</p>
-    <p><strong>Estimated Monthly Profit (60% Investor):</strong> <span id="profitAmount">0</span> PKR</p>
-    <p><strong>Company Share (40%):</strong> <span id="companyShare">0</span> PKR</p>
+    <!-- Investment -->
+    <div id="invest" class="card">
+      <h2>Invest Now</h2>
+      <form id="investForm">
+        <input type="text" placeholder="Full Name" name="name" required>
+        <input type="email" placeholder="Email" name="email" required>
+        <input type="number" placeholder="Amount (Minimum 500 PKR)" name="amount" min="500" required>
+        <p><b>Send Payment:</b> NayaPay # <b>03280203486</b></p>
+        <button type="submit">Submit Investment</button>
+      </form>
+    </div>
   </div>
-</section>
 
-<section>
-  <h2>Contact Us</h2>
-  <p>Email: <a href="mailto:virtualflowmarketing@gmail.com">virtualflowmarketing@gmail.com</a></p>
-</section>
+  <footer>
+    <p>© 2025 Virtual Inverter | Contact: virtualflowmarketing@gmail.com</p>
+  </footer>
 
-<footer>
-  <p>&copy; <span id="year"></span> Virtual Inverter Demo. All Rights Reserved.</p>
-</footer>
+  <script>
+    // Signup Form
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Signup successful! You can now log in.');
+    });
 
-<script>
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzw_TcvR2g-Tu6WKdxj5GPcVF02gHmky0Wvf2e11Kpi0XpDmAt-BNaaB8LYEiehGwBy7w/exec";
+    // Login Form
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Login successful!');
+    });
 
-  // Automatic current year
-  document.getElementById('year').innerText = new Date().getFullYear();
-
-  // Sign In / Sign Up toggle
-  let isSignUp = false;
-  const authForm = document.getElementById('authForm');
-  const toggleText = document.querySelector('.toggle');
-  const authMessage = document.getElementById('authMessage');
-  const nameField = document.getElementById('name');
-
-  function toggleForm() {
-    isSignUp = !isSignUp;
-    nameField.style.display = isSignUp ? "block" : "none";
-    toggleText.textContent = isSignUp ? "Already have an account? Sign In" : "Don't have an account? Sign Up";
-  }
-
-  authForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    const name = nameField.value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-    let payload = {name, email, password};
-
-    fetch(WEB_APP_URL, {
-      method: "POST",
-      body: JSON.stringify(payload)
-    })
-    .then(res => res.json())
-    .then(data => {
-      authMessage.style.display = "block";
-      authMessage.style.background = "#d1e7dd";
-      authMessage.style.color = "#0f5132";
-      authMessage.innerText = isSignUp ? "✅ Account Created!" : "🔑 Logged In!";
-    })
-    .catch(err => console.error(err));
-  });
-
-  // Investment Form
-  const investmentForm = document.getElementById('investmentForm');
-  const invMessage = document.getElementById('invMessage');
-  const invAmount = document.getElementById('invAmount');
-  const profitAmount = document.getElementById('profitAmount');
-  const companyShare = document.getElementById('companyShare');
-
-  investmentForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    const amount = parseInt(document.getElementById('amount').value);
-    if(amount < 500){
-      invMessage.style.display = "block";
-      invMessage.style.background = "#f8d7da";
-      invMessage.style.color = "#842029";
-      invMessage.innerText = "Minimum investment is 500 PKR.";
-      return;
-    }
-
-    const payload = {name: "", email:"", password:"", investment: amount};
-
-    fetch(WEB_APP_URL, {method:"POST", body: JSON.stringify(payload)})
-    .then(res => res.json())
-    .then(data => {
-      invMessage.style.display = "block";
-      invMessage.style.background = "#d1e7dd";
-      invMessage.style.color = "#0f5132";
-      invMessage.innerText = "Thank you! Our team will contact you at virtualflowmarketing@gmail.com.";
-
-      // Update dashboard
-      invAmount.innerText = amount;
-      profitAmount.innerText = Math.floor(amount * 0.60 * 0.10);
-      companyShare.innerText = Math.floor(amount * 0.40 * 0.10);
-    })
-    .catch(err => console.error(err));
-  });
-
-  function showPayment(){
-    alert("Please send your payment to NayaPay account: 03280203486");
-  }
-</script>
-
+    // Invest Form
+    document.getElementById('investForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      let amount = e.target.amount.value;
+      if (amount < 500) {
+        alert('Minimum investment is 500 PKR');
+      } else {
+        alert('Investment submitted! Please confirm your payment.');
+      }
+    });
+  </script>
 </body>
 </html>
